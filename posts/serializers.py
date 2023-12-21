@@ -18,7 +18,8 @@ class PostSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer): # new
+    #id = serializers.UUIDField(source='public_id', read_only=True, format='hex')
 
     class Meta:
         model = get_user_model()
-        fields = ("id", "username",)
+        fields = ("id", "username", "public_id")

@@ -16,8 +16,13 @@ class CustomUserAdmin(UserAdmin):
         "name",
         "is_staff",
     ]
-    fieldsets = UserAdmin.fieldsets + ((None, {"fields": ("name",)}),)
-    add_fieldsets = UserAdmin.add_fieldsets + ((None, {"fields": ("name",)}),)
+    fieldsets = UserAdmin.fieldsets + ((None, {"fields": ("name", "public_id")}),)
+    add_fieldsets = UserAdmin.add_fieldsets + ((None, {"fields": ("name", "public_id")}),)
+
+    def get_readonly_fields(self, request, obj=None):
+        # Make 'public_id' read-only
+        readonly_fields = super().get_readonly_fields(request, obj)
+        return readonly_fields + ('public_id',)
 
 
 admin.site.register(CustomUser, CustomUserAdmin)
