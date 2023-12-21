@@ -10,8 +10,9 @@ class CustomUserManager(BaseUserManager):
 
     def get_object_by_public_id(self, public_id):
         try:
-            return self.get(public_id=public_id)
-        except ObjectDoesNotExist:
+            validated_uuid = uuid.UUID(public_id, version=4)
+            return self.get(public_id=validated_uuid)
+        except (ObjectDoesNotExist, ValueError, TypeError):
             raise Http404("User not found by public_id")
 
 
