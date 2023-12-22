@@ -20,7 +20,7 @@ class CustomUserManager(BaseUserManager, AbstractManager):
 
 
 class CustomUser(AbstractUser, AbstractModel, PermissionsMixin):
-    name = models.CharField(null=True, blank=True, max_length=100)
+    #name = models.CharField(null=True, blank=True, max_length=100)
     objects = CustomUserManager()
 
 

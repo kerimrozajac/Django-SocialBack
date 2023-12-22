@@ -13,11 +13,11 @@ class CustomUserAdmin(UserAdmin):
     list_display = [
         "email",
         "username",
-        "name",
+        #"name",
         "is_staff",
     ]
-    fieldsets = UserAdmin.fieldsets + ((None, {"fields": ("name", "public_id")}),)
-    add_fieldsets = UserAdmin.add_fieldsets + ((None, {"fields": ("name", "public_id")}),)
+    fieldsets = UserAdmin.fieldsets + ((None, {"fields": ("public_id",)}),)
+    add_fieldsets = UserAdmin.add_fieldsets + ((None, {"fields": ("public_id",)}),)
 
     def get_readonly_fields(self, request, obj=None):
         # Make 'public_id' read-only
