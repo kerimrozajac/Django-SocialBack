@@ -18,13 +18,9 @@ class PostSerializer(AbstractSerializer):
 
     def to_representation(self, instance):
         rep = super().to_representation(instance)
-        # Convert UUID to string for 'author'
         rep['author'] = str(rep['author'])
-        print(rep)
         author_public_id = rep["author"]
-        print(author_public_id)
         author = CustomUser.objects.get_object_by_public_id(author_public_id)
-        print(author)
         rep["author"] = UserSerializer(author).data
         return rep
 
