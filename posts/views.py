@@ -10,13 +10,14 @@ from .serializers import PostSerializer, UserSerializer
 from abstract.views import AbstractViewSet
 
 
-class PostViewSet(viewsets.ModelViewSet):  # new
+class PostViewSet(AbstractViewSet):
+    http_method_names = ('post', 'get')
     permission_classes = (IsAuthorOrReadOnly,)
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
 
-class UserViewSet(AbstractViewSet):  # new
+class UserViewSet(AbstractViewSet):
     permission_classes = [IsAdminUser]
     queryset = get_user_model().objects.all()
     serializer_class = UserSerializer

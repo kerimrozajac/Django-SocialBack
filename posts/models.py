@@ -2,13 +2,19 @@
 from django.conf import settings
 from django.db import models
 
+from abstract.models import AbstractModel, AbstractManager
 
-class Post(models.Model):
+
+class PostManager(AbstractManager):
+    pass
+
+
+class Post(AbstractModel):
     title = models.CharField(max_length=50)
     body = models.TextField()
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    edited = models.BooleanField(default=False)
+    objects = PostManager()
 
     def __str__(self):
-        return self.title
+        return f"{self.author.name}"
