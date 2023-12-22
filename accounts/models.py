@@ -5,8 +5,10 @@ from django.db import models
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
 
+from abstract.models import AbstractModel, AbstractManager
 
-class CustomUserManager(BaseUserManager):
+
+class CustomUserManager(BaseUserManager, AbstractManager):
 
     def get_object_by_public_id(self, public_id):
         try:
@@ -16,9 +18,9 @@ class CustomUserManager(BaseUserManager):
             raise Http404("User not found by public_id")
 
 
-class CustomUser(AbstractUser):
+class CustomUser(AbstractUser, AbstractModel):
     name = models.CharField(null=True, blank=True, max_length=100)
-    public_id = models.UUIDField(db_index=True, unique=True, default=uuid.uuid4, editable=False)
+    #public_id = models.UUIDField(db_index=True, unique=True, default=uuid.uuid4, editable=False)
     objects = CustomUserManager()
 
 
