@@ -14,12 +14,22 @@ class PostSerializer(AbstractSerializer):
     def validate_author(self, value):
         if self.context["request"].user != value:
             raise ValidationError("You can't create a post for another user.")
-
         return value
+
+    def to_representation(self, instance):
+        rep = super().to_representation(instance)
+        # Convert UUID to string for 'author'
+        rep['author'] = str(rep['author'])
+        print(rep)
+        author_public_id = rep["author"]
+        print(author_public_id)
+        author = CustomUser.objects.get_object_by_public_id(author_public_id)
+        print(author)
+        rep["author"] = UserSerializer(author).data
+        return rep
 
     class Meta:
         fields = (
-            "id",
             "author",
             "title",
             "body",
@@ -32,10 +42,10 @@ class PostSerializer(AbstractSerializer):
         read_only_fields = ["edited"]
 
 
-class UserSerializer(AbstractSerializer): # new
+class UserSerializer(AbstractSerializer):  # new
 
     class Meta:
         model = get_user_model()
-        fields = ("id", "username", "public_id", "first_name", "last_name", "email", "is_active", "created", "updated",)
+        fields = ("username", "public_id", "first_name", "last_name", "email", "is_active", "created", "updated",)
         # umjesto created -> date_joined
         # nedostaju u modelu: "bio", "avatar", "updated" dodati naknadno
