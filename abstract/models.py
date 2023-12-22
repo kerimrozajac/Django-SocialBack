@@ -10,7 +10,7 @@ class AbstractManager(models.Manager):
             validated_uuid = uuid.UUID(public_id, version=4)
             return self.get(public_id=validated_uuid)
         except (ObjectDoesNotExist, ValueError, TypeError):
-            return Http404
+            raise Http404(f"{self.model.__name__} with public_id '{public_id}' not found")
 
 
 class AbstractModel(models.Model):
