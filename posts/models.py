@@ -17,7 +17,7 @@ class Post(AbstractModel):
     objects = PostManager()
 
     def __str__(self):
-        return f"{self.author.username}"
+        return f"{self.title}"
 
 # “comment_data = {"post": post, "author": user, "body": "A comment."}”
 #

@@ -83,6 +83,7 @@ class UserViewSet(AbstractViewSet):
     queryset = get_user_model().objects.all()
     serializer_class = UserSerializer
 
+    # get_object se ponavlja - mozda nekako ukljuciti u abstract viewset
     def get_object(self):
         obj = get_user_model().objects.get_object_by_public_id(self.kwargs['pk'])
         self.check_object_permissions(self.request, obj)
