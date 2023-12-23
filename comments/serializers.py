@@ -11,9 +11,17 @@ class CommentSerializer(AbstractSerializer):
     author = serializers.SlugRelatedField(queryset=CustomUser.objects.all(), slug_field='public_id')
     post = serializers.SlugRelatedField(queryset=Post.objects.all(), slug_field='public_id')
 
+    """"
     def to_representation(self, instance):
         rep = super().to_representation(instance)
         author = CustomUser.objects.get_object_by_public_id(rep["author"])
+        rep["author"] = UserSerializer(author).data
+        return rep
+    """
+
+    def to_representation(self, instance):
+        rep = super().to_representation(instance)
+        author = CustomUser.objects.get_object_by_public_id(str(rep["author"]))  # Convert UUID to string
         rep["author"] = UserSerializer(author).data
         return rep
 
