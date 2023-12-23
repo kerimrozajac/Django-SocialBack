@@ -12,13 +12,6 @@ from posts.models import Post
 class CustomUserManager(BaseUserManager, AbstractManager):
     pass
 
-    #def get_object_by_public_id(self, public_id):
-    #    try:
-    #        validated_uuid = uuid.UUID(public_id, version=4)
-    #        return self.get(public_id=validated_uuid)
-    #    except (ObjectDoesNotExist, ValueError, TypeError):
-    #        raise Http404("User not found by public_id")
-
 
 class CustomUser(AbstractUser, AbstractModel, PermissionsMixin):
     posts_liked = models.ManyToManyField("posts.Post", related_name="liked_by")

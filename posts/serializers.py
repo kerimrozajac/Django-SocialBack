@@ -57,5 +57,4 @@ class UserSerializer(AbstractSerializer):  # new
     class Meta:
         model = get_user_model()
         fields = ("username", "public_id", "first_name", "last_name", "email", "is_active", "created", "updated",)
-        # umjesto created -> date_joined
-        # nedostaju u modelu: "bio", "avatar", "updated" dodati naknadno
+        # nedostaju u modelu: "bio", "avatar" dodati naknadno

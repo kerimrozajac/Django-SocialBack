@@ -17,4 +17,12 @@ class Post(AbstractModel):
     objects = PostManager()
 
     def __str__(self):
-        return f"{self.author.name}"
+        return f"{self.author.username}"
+
+# “comment_data = {"post": post, "author": user, "body": "A comment."}”
+#
+# Excerpt From
+# Full Stack Django and React
+# Kolawole Mangabo
+# https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewBook?id=0
+# This material may be protected by copyright. comment = Comment.objects.create(**comment_data)

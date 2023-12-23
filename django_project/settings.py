@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     # Local
     "accounts.apps.AccountsConfig",  # new
     "posts.apps.PostsConfig",  # new
+    "comments.apps.CommentsConfig",
 ]
 
 REST_FRAMEWORK = {  # new
