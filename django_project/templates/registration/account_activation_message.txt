@@ -1,0 +1,10 @@
+Hello from example.com!
+
+You're receiving this e-mail because user {{ user.username }} has given your e-mail address to register an account on example.com.
+
+Your account activation code is:
+{{ confirmation_code }}
+
+Please go to {{ activation_link }} to activate your account.
+
+Thank you for using example.com!

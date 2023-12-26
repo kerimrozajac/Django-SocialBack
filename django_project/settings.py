@@ -171,6 +171,11 @@ AUTH_USER_MODEL  = "accounts.CustomUser"  # new
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"  # new
 
+ACCOUNT_EMAIL_TEMPLATES = {
+    'account_activation_subject': 'templates/registration/account_activation_subject.txt',
+    'account_activation_message': 'templates/registration/account_activation_message.txt',
+}
+
 SITE_ID = 1  # new
 
 SPECTACULAR_SETTINGS = {
