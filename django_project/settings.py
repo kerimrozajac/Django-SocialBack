@@ -114,7 +114,6 @@ WSGI_APPLICATION = 'django_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-"""
 DATABASES = {
     'default': {
         "ENGINE": "django.db.backends.postgresql",
@@ -123,20 +122,6 @@ DATABASES = {
         "PASSWORD": "postgres",
         "HOST": "db",
         "PORT": 5432,
-    }
-}
-"""
-DATABASES = {
-    'default': {
-        'ENGINE': 'djongo',
-        'ENFORCE_SCHEMA': False,  # Set to True for schema validation
-        'NAME': 'mydatabase',
-        'CLIENT': {
-            'host': 'mongo',
-            'port': 27017,
-            'username': '',
-            'password': '',
-        }
     }
 }
 
