@@ -10,7 +10,32 @@ from posts.models import Post
 
 
 class CustomUserManager(BaseUserManager, AbstractManager):
-    pass
+    def get_object_by_public_id(self, public_id):
+        try:
+            instance = self.get(public_id=public_id)
+            return instance
+        except (ObjectDoesNotExist, ValueError, TypeError):
+            return Http404
+
+    def create_user(self, email, password=None, **extra_fields):
+        if not email:
+            raise ValueError('The Email field must be set')
+        email = self.normalize_email(email)
+        user = self.model(email=email, **extra_fields)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, email, password=None, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+
+        if extra_fields.get('is_staff') is not True:
+            raise ValueError('Superuser must have is_staff=True.')
+        if extra_fields.get('is_superuser') is not True:
+            raise ValueError('Superuser must have is_superuser=True.')
+
+        return self.create_user(email, password, **extra_fields)
 
 
 class CustomUser(AbstractUser, AbstractModel, PermissionsMixin):
