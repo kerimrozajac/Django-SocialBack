@@ -9,14 +9,12 @@ services:
     ports:
       - 8000:8000
     depends_on:
-      - db
+      - mongo
 
-  db:
-    image: postgres:13
+  mongo:
+    image: mongo:latest
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
-    environment:
-      - "POSTGRES_HOST_AUTH_METHOD=trust"
+      - mongo_data:/data/db
 
 volumes:
-  postgres_data:
+  mongo_data:
