@@ -4,6 +4,7 @@ from django.contrib.auth.models import AbstractUser, BaseUserManager, Permission
 from django.db import models
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
+from django.utils.crypto import get_random_string
 
 from abstract.models import AbstractModel, AbstractManager
 from posts.models import Post
@@ -40,8 +41,18 @@ class CustomUserManager(BaseUserManager, AbstractManager):
 
 class CustomUser(AbstractUser, AbstractModel, PermissionsMixin):
     posts_liked = models.ManyToManyField("posts.Post", related_name="liked_by")
+    verification_code = models.CharField(max_length=5, blank=True)
     # name = models.CharField(null=True, blank=True, max_length=100)
     objects = CustomUserManager()
+
+    def generate_verification_code(self):
+        # Generate a random 5-character verification code
+        self.verification_code = get_random_string(length=5)
+
+    def save(self, *args, **kwargs):
+        if not self.verification_code:
+            self.generate_verification_code()
+        super().save(*args, **kwargs)
 
     def like(self, post):
         """Like `post` if it hasn't been done yet"""
