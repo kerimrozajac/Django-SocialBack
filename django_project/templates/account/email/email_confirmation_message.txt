@@ -1,4 +1,4 @@
-Hello from example.com!
+Hello!!!!!!!!
 
 You're receiving this e-mail because user {{ user.username }} has given your e-mail address to register an account on example.com.
 
