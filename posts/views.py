@@ -38,6 +38,17 @@ class PostViewSet(AbstractViewSet):
     serializer_class = PostSerializer
 
     def get_queryset(self):
+        """
+        This view should return a list of all posts for the user if a user_id is provided
+        or all posts if no user_id is provided.
+        """
+        user_id = self.kwargs.get('id')  # Get the user_id from the URL
+
+        # If a user_id is provided, filter posts by the user
+        if user_id:
+            return Post.objects.filter(author__id=user_id)
+
+        # If no user_id is provided, return all posts
         return Post.objects.all()
 
     def get_object(self):

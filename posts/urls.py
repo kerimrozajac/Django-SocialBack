@@ -17,5 +17,6 @@ posts_router.register(r'comment', CommentViewSet, basename="post-comment")
 
 urlpatterns = [
 *router.urls,
-*posts_router.urls
+*posts_router.urls,
+path('users/<int:id>/posts/', PostViewSet.as_view({'get': 'list'}), name='user-posts'),
 ]
