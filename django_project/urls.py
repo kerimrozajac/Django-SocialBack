@@ -4,6 +4,7 @@ from django.urls import path, include  # new
 from drf_spectacular.views import (SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView,)
 from posts.views import PostViewSet
 from accounts.views import RegisterView, VerifyCodeView
+from devices.views import RegisterDeviceView, DeviceListView, DeviceDetailView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -18,4 +19,9 @@ urlpatterns = [
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     path("api/schema/redoc/", SpectacularRedocView.as_view(url_name="schema"), name="redoc",),
     path("api/schema/swagger-ui/", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui"),
+    path('api/register_device/', RegisterDeviceView.as_view(), name='register_device'),
+    path('api/devices/', DeviceListView.as_view(), name='device_list'),  # New route for listing devices
+    path('api/device/<int:id>/', DeviceDetailView.as_view(), name='device_detail'),  # Get, Update, or Delete a device
+
+
 ]

@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-*oguc-fw+i3-m7c3#qidicj8%@xj%w*)f_vke2m=+)9$d)6ors
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.1.5']
 
 
 # Application definition
@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     "accounts.apps.AccountsConfig",  # new
     "posts.apps.PostsConfig",  # new
     "comments.apps.CommentsConfig",
+    "devices.apps.DevicesConfig",
 ]
 
 REST_FRAMEWORK = {  # new
